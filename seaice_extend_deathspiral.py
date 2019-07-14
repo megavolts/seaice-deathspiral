@@ -84,10 +84,8 @@ for ii in range(int(NPOINTS/freq-1)):
         ax[area].xaxis.set_ticklabels(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
         ax[area].set_rmin(1)
         ax[area].set_rmax(max(data[area].Extent)*1.1)
-        #ax[area].text(4.5, 14, datetime.datetime(2022, 12, 29).strftime("%Y %b %d"), fontsize=15, color='w', bbox={'facecolor':'w', 'alpha':1, 'pad':5, 'edgecolor':'w'})
-        #ax[area].text(4.5, 14, datetime.datetime(data[area].Year[ii*freq], data[area].Month[ii*freq], data[area].Day[ii*freq]).strftime("%Y %b %d"), fontsize = 15 )
     plt.draw()
     fig.canvas.draw()
     time.sleep(freq/1000)
     if flag_save:
-        plt.savefig(os.path.join(data_out, datetime.datetime(data[area].Year[ii*freq], data[area].Month[ii*freq], data[area].Day[ii*freq]).strftime("%Y%m%d")+'.png'), dpi=75)
+        fig.savefig(os.path.join(data_out, datetime.datetime(data[area].Year[ii*freq], data[area].Month[ii*freq], data[area].Day[ii*freq]).strftime("%Y%m%d")+'.png'), dpi=75)
