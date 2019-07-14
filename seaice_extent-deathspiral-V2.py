@@ -12,8 +12,8 @@ import matplotlib.pyplot as plt
 
 # variable
 AREA = ['Arctic']
-FREQ = 1  # days
-FIG_TYPE = 'extn_hires'
+FREQ = 50  # days
+FIG_TYPE = 'conc_hires'
 
 flag_save = True
 flag_show = False
@@ -27,7 +27,8 @@ data_dir = '/mnt/data/UAF-data/NSIDC/seaice_index/'
 data_out = '/mnt/data/UAF-data/seaice/deathspiral'
 data_subdir = {'Arctic': 'north/daily', 'Antarctic': 'south/daily'}
 data_dict = {'Arctic': ['N'], 'Antarctic': ['S']}
-fig_dict = {'extn_hires': ['_extn_hires_v3.0.png', [592, 915], [102, 1660], [57, 1111]]}
+fig_dict = {'extn_hires': ['_extn_hires_v3.0.png', [592, 915], [102, 1660], [57, 1111]],
+            'conc_hires': ['_conc_hires_v3.0.png', [592, 915], [102, 1660], [57, 1111]]}
 
 if isinstance(flag_show, int):
     update_time = flag_show
@@ -105,10 +106,10 @@ for area in AREA:
     for date in dates:
         if flag_save:
             fig_dir = os.path.join(data_out, area, FIG_TYPE)
-            fig_path = os.path.join(fig_dir, area+date.strftime("-%Y%m%d-")+FIG_TYPE+'.png')
+            fig_output = os.path.join(fig_dir, area+date.strftime("-%Y%m%d-")+FIG_TYPE+'.png')
             if not os.path.exists(fig_dir):
                 os.makedirs(fig_dir)
-        if os.path.exists(fig_path) or date == dates.min():
+        if os.path.exists(fig_output) or date == dates.min():
             continue
         print(date)
 
@@ -187,7 +188,7 @@ for area in AREA:
         ax_c.text(0.95, 0.02, 'data: NSIDC', ha='right', transform=plt.gcf().transFigure)
 
         if flag_save:
-            plt.savefig(fig_path, dpi=125)
+            plt.savefig(fig_output, dpi=125)
             plt.close()
         if flag_show:
             plt.draw()
